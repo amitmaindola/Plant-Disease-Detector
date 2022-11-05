@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import React from "react";
@@ -36,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#000000a6",
     fontSize: "20px",
     fontWeight: 900,
+    margin: 'auto',
   },
   root: {
     maxWidth: 345,
@@ -54,8 +56,11 @@ const useStyles = makeStyles((theme) => ({
     padding: "4em 1em 0 1em",
   },
   mainContainer: {
-    height: "93vh",
-    marginTop: "8px",
+    background: `black`,
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    height: "90vh",
   },
   imageCard: {
     margin: "auto",
@@ -127,7 +132,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   appbar: {
-    background: "black",
+    background: '#be6a77',
     boxShadow: 'none',
     color: 'white'
   },
@@ -136,7 +141,13 @@ const useStyles = makeStyles((theme) => ({
   },
   heading:{
     textAlign: 'center',
-    background: 'black'
+    background: 'black',
+    color: 'white',
+    margin: '0px',
+    padding: '30px'
+  },
+  borderWhite: {
+    border: 'white 2px solid !important'
   }
 }));
 export const ImageUpload = () => {
@@ -153,12 +164,11 @@ export const ImageUpload = () => {
       let formData = new FormData();
       formData.append("file", selectedFile);
       let res = await axios({
-        method: "POST",
+        method: "post",
         url: process.env.REACT_APP_API_URL,
         data: formData,
       });
       if (res.status === 200) {
-        console.log(data);
         setData(res.data);
       }
       setIsloading(false);
@@ -187,7 +197,6 @@ export const ImageUpload = () => {
     }
     setIsloading(true);
     sendFile();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [preview]);
 
   const onSelectFile = (files) => {
@@ -208,11 +217,9 @@ export const ImageUpload = () => {
 
   return (
     <React.Fragment>
-      <AppBar position="static" className={classes.appbar}>
-          <h1 className={classes.heading}>
-            Potato Plant Disease Detector
-          </h1>
-      </AppBar>
+      <h1 className={classes.heading}>
+        Potato Plant Disease Detector
+      </h1>
       <Container maxWidth={false} className={classes.mainContainer} disableGutters={true}>
         <Grid
           className={classes.gridContainer}
@@ -234,7 +241,7 @@ export const ImageUpload = () => {
               </CardActionArea>
               }
               {!image && <CardContent className={classes.content}>
-                <DropzoneArea
+                <DropzoneArea className={classes.borderWhite}
                   acceptedFiles={['image/*']}
                   dropzoneText={"Drag and drop an image of a potato plant leaf to process"}
                   onChange={onSelectFile}
