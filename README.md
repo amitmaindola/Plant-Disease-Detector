@@ -8,7 +8,7 @@
 4. Web Application Link: <a href="https://amitmaindola.github.io/PDD-Production_build/">amitmaindola.github.io/PDD-Production_build/</a>
 
 
-## Folder Structure
+## File System
 1. **Model Training**: In `training/` folder you will find all files related to the training of the Deep Learning Model.
 1. **Saved Model**: In `saved_models/1/` folder you will find the final saved trained model.
 1. **Server**: In `server/` folder you will find `requirements.txt` and `main.py` files which will act as a backend API server for the application.
